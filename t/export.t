@@ -8,11 +8,12 @@ subtest 'import and export' => sub {
     local $SIG{__WARN__} = sub { $warn = $_[0] };
     eval q{
         package runtime::export;
+
         use MyExport;
-        warn $joy;
+
+        joy;
     };
     ok !$@ or diag $@;
-    like $warn, qr/weee/;
 };
 
 subtest 'import and export and inheritance' => sub {
@@ -23,10 +24,9 @@ subtest 'import and export and inheritance' => sub {
 
         use MyExportInherited;
 
-        warn $joy;
+        joy;
     };
     ok !$@ or diag $@;
-    like $warn, qr/weee/;
 };
 
 done_testing;

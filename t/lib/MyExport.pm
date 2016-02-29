@@ -2,15 +2,17 @@ package MyExport;
 
 use base 'Import::Base';
 
-our @EXPORT_OK = qw($joy);
+our @EXPORT_OK = qw(joy);
 
 our @IMPORT_MODULES = (
     'strict',
     'warnings',
-    feature => [qw( :5.14 )],
-    MyExport => [qw( $joy )],
+    feature => [qw( :5.10 )],
+    MyExport => [qw( joy )],
 );
 
-our $joy = "weee";
+sub joy {
+    return "wee";
+}
 
 1;
