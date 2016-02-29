@@ -171,9 +171,8 @@ sub _import_modules {
             $module =~ s/^-//;
         }
 
-        if ($class eq $module || $class->isa($module)) {
-            my $pkg = $class->isa($module) ? $module : $class;
-            $pkg->export_to_level( $class->isa($module) ? 4 : 3, $pkg, @{ $imports } );
+        if ($module->isa("Import::Base")) {
+            $module->export_to_level( 2, $module, @{ $imports } );
 
             next;
         }
