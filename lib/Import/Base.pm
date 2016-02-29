@@ -7,6 +7,10 @@ use mro ();
 use Import::Into;
 use Module::Runtime qw( use_module );
 
+require Exporter;
+
+our @ISA = qw(Exporter);
+
 sub modules {
     my ( $class, $bundles, $args ) = @_;
     my @modules = ();
@@ -63,6 +67,8 @@ sub import {
 
     my @modules = $class->modules( $bundles, $args );
     $class->_import_modules( \@modules, $bundles, $args );
+
+    $class->export_to_level(1, @_);
 }
 
 sub _import_modules {
