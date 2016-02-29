@@ -67,8 +67,6 @@ sub import {
 
     my @modules = $class->modules( $bundles, $args );
     $class->_import_modules( \@modules, $bundles, $args );
-
-    $class->export_to_level(1, @_);
 }
 
 sub _import_modules {
@@ -171,6 +169,12 @@ sub _import_modules {
         if ( $module =~ /^-/ ) {
             $method = 'unimport::out_of';
             $module =~ s/^-//;
+        }
+
+        if ($class eq $module) {
+            $class->export_to_level( 3, $class, @{ $imports } );
+
+            next;
         }
 
         use_module( $module );
